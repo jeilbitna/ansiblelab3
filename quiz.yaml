@@ -1,0 +1,27 @@
+---
+  - name: Git 퀴즈
+    hosts: all
+    gather_facts: true
+    become: true
+
+    tasks:
+      - name: git 설치하기
+        yum: 
+          name: git
+          state: present
+        when: ansible_distribution == 'CentOS'
+
+      - name: httpd 설치하기
+        yum:
+          name: httpd
+          state: present
+        when: ansible_distribution == 'CentOS'
+
+      - name: httpd 시작하기
+        service:
+          name: httpd
+          state: started
+          enabled: yes
+        when: ansible_distribution == 'CentOS'
+
+
